@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class Quizzler extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.grey[700],
-        body: SafeArea(
+        body: const SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: QuizPage(),
@@ -43,6 +44,8 @@ class _QuizPageState extends State<QuizPage> {
 
   int questionNumber = 0;
 
+  List<bool> answers = [false, true, true];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -67,7 +70,7 @@ class _QuizPageState extends State<QuizPage> {
         ),
         Expanded(
           child: Padding(
-            padding: EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(15.0),
             child: TextButton(
               style: TextButton.styleFrom(
                 backgroundColor: Colors.green,
@@ -81,6 +84,13 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked true.
+                bool correctAnswer = answers[questionNumber];
+                if (correctAnswer == true) {
+                  print('user got it right');
+                } else {
+                  print('user got it wrong');
+                }
+
                 setState(() {
                   questionNumber++;
                 });
@@ -104,6 +114,14 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
+
+                bool correctAnswer = answers[questionNumber];
+                if (correctAnswer == false) {
+                  print('user got it right');
+                } else {
+                  print('user got it wrong');
+                }
+
                 setState(() {
                   questionNumber++;
                 });
@@ -118,3 +136,9 @@ class _QuizPageState extends State<QuizPage> {
     );
   }
 }
+
+/*
+question1: 'You can lead a cow down stairs but not up stairs.', false,
+question2: 'Approximately one quarter of human bones are in the feet.', true,
+question3: 'A slug\'s blood is green.', true,
+*/
