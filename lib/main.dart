@@ -17,7 +17,7 @@ class Quizzler extends StatelessWidget {
         backgroundColor: Colors.grey[700],
         body: const SafeArea(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: EdgeInsets.symmetric(horizontal: 8),
             child: QuizPage(),
           ),
         ),
@@ -41,12 +41,12 @@ class _QuizPageState extends State<QuizPage> {
 
     setState(() {
       if (userPickedAnswer == correctAnswer) {
-        scoreKeeper.add(Icon(
+        scoreKeeper.add(const Icon(
           Icons.check,
           color: Colors.green,
         ));
       } else {
-        scoreKeeper.add(Icon(
+        scoreKeeper.add(const Icon(
           Icons.close,
           color: Colors.red,
         ));
@@ -64,7 +64,7 @@ class _QuizPageState extends State<QuizPage> {
         Expanded(
           flex: 5,
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(8.0),
             child: Center(
               child: Text(
                 quizBrain.getQuestionText(),
@@ -119,8 +119,11 @@ class _QuizPageState extends State<QuizPage> {
             ),
           ),
         ),
-        Row(
-          children: scoreKeeper,
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: scoreKeeper,
+          ),
         )
       ],
     );
